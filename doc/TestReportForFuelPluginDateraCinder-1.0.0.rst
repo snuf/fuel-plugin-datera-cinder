@@ -1,5 +1,10 @@
-Test Report for Datara-cinder-1.0.0 Fuel Plugin
-===============================================
+Test Report for Datera Cinder Fuel Plugin
+=========================================
+
+:Version: 1.0-1.0.0-1
+:MOS Fuel Version: 7.0 and 8.0
+:Openstack Version: Kilo and Liberty
+:Product: Fuel Cinder Driver Plugin
 
 .. contents::
     :depth: 2
@@ -7,19 +12,19 @@ Test Report for Datara-cinder-1.0.0 Fuel Plugin
 Revision history
 ================
 
-+---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------+
-| **Version**   | **Revision date**   | **Editor**                                                               | **Comment**                                  |
-+---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------+
-| 0.1           | 23.01.2015          | Irina Povolotskaya                                                       | Created the template structure.              |
-|               |                     |                                                                          |                                              |
-|               |                     | (`*ipovolotskaya@mirantis.com* <mailto:ipovolotskaya@mirantis.com>`__)   |                                              |
-+---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------+
-| 1.0           | 10.06.2016          | Funs Kessen <`*ftk@datera.io* <mailto:ttk@datera.io>`__>                 | Fuel Plugin Datera Cinder 1.0.0 Test Report. |
-+---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------+
++---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------------+
+| **Version**   | **Revision date**   | **Editor**                                                               | **Comment**                                        |
++---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------------+
+| 0.1           | 23.01.2015          | Irina Povolotskaya                                                       | Created the template structure.                    |
+|               |                     |                                                                          |                                                    |
+|               |                     | (`*ipovolotskaya@mirantis.com* <mailto:ipovolotskaya@mirantis.com>`__)   |                                                    |
++---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------------+
+| 1.0           | 10.06.2016          | Funs Kessen <`*ftk@datera.io* <mailto:ttk@datera.io>`__>                 | Fuel Plugin Datera Cinder 1.0-1.0.0-1 Test Report. |
++---------------+---------------------+--------------------------------------------------------------------------+----------------------------------------------------+
 
 Document purpose
 ================
-This document provides the test run result for all of Datera-cinder-1.0.0 Fuel Plugin on Mirantis Openstack 7.0 and Mirantis Openstack 8.0.
+This document provides the test run result for all of Datera-cinder-1.0-1.0.0-1 Fuel Plugin on Mirantis Openstack 7.0 and Mirantis Openstack 8.0.
 
 Test environment
 ================
@@ -110,4 +115,3 @@ Appendix
 * `Datera EDF <http://www.datera.io/>`_
 * `Mirantis Fuel Plugins <https://www.mirantis.com/validated-solution-integrations/fuel-plugins/>`_
 * `Datera EDF Fuel Tests <https://github.com/snuf/fuel-devops-datera/blob/master/plugin_datera/test_plugin_datera.py>`_
-

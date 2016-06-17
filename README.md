@@ -50,6 +50,7 @@ git clone https://github.com/snuf/fuel-plugin-datera-cinder
 fpb --build fuel-plugin-datera-cinder
 scp <rpm> <fuel master node>
 fuel plugins --install <rpm>
+fuel plugins --list
 ```
 
 ## Datera plugin configuration
