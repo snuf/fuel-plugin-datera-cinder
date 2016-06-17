@@ -39,12 +39,12 @@ the necessary details to configure cinder correctly,
 License
 -------
 
-=======================   ==================
-Component                  License type
-=======================   ==================
-Datera Cinder Driver      Apache 2.0
+======================= ==================
+Component               License type
+======================= ==================
+Datera Cinder Driver    Apache 2.0
 
-=======================   ==================
+======================= ==================
 
 Requirements
 ------------
@@ -146,20 +146,24 @@ Plugin Verification
 
 After configuring the plugin and the environement is deployed verification of the plugin can commence.
 
-#. Use a web browser and go to the Datera web UI, login and go to the *Bell Symbol* in the upper right hand corner and select *User Activity*.
+1. Use a web browser and go to the Datera web UI, login and go to the *Bell Symbol* in the upper right hand corner and select *User Activity*.
 
 An alternative to the WebUI is using the REST API. The interactive browser for the REST API can be found on port 7800 of the Cluster management VIP adres.
 
-#. Here's an example, where 192.168.123.20 should be replaced with your Datera Management VIP, using the REST API from a bash shell::
+2. Here's an example, where 192.168.123.20 should be replaced with your Datera Management VIP, using the REST API from a bash shell::
 
-    DATKEY=`curl -X PUT -H "auth-token: " -H "content-type: application/json" --data '{"name":"admin","password":"password"}' http://192.168.123.20:7717/v2/login | grep key | awk '{ print $2 }'`
+    DATKEY=`curl -X PUT -H "auth-token: " \
+      -H "content-type: application/json" \
+      --data '{"name":"admin","password":"password"}' \
+      http://192.168.123.20:7717/v2/login | grep key | awk '{ print $2 }'`
 
-    watch "curl -X GET -H \"auth-token: $DATKEY\" -H \"content-type: application/json\" http://192.168.123.20:7717/v2/audit_logs | tac"
+    watch "curl -X GET -H \"auth-token: $DATKEY\" \
+      -H \"content-type: application/json\" \
+      http://192.168.123.20:7717/v2/audit_logs | tac"
 
-#. Plugin verification is done by running the OpenStack Test Framework (OSTF):
-    Open the *Health Check tab* in the Fuel web UI, check the *Select All box* and push the *Run Tests button*. The section of main interest for the plugin is the *Fuctional tests section*.
+3. Plugin verification is done by running the OpenStack Test Framework (OSTF). Open the *Health Check tab* in the Fuel web UI, check the *Select All box* and push the *Run Tests button*. The section of main interest for the plugin is the *Fuctional tests section*.
 
-#. If OSTF fails in the *functional tests section* check the troubleshooting_ guide.
+4. If OSTF fails in the *functional tests section* check the troubleshooting_ guide.
 
 User Guide
 ==========
@@ -186,9 +190,10 @@ When the OSTF checks fail, or if deployment of volumes and/or instances with reg
 
   .. _connectivity:
 
-  a) Connectivity error::
+  a) API Connectivity error::
 
-        Failed to make a request to Datera cluster endpoint due to the following reason: ('Connection aborted.', error(113, 'EHOSTUNREACH'))
+        Failed to make a request to Datera cluster endpoint due to the following
+        reason: ('Connection aborted.', error(113, 'EHOSTUNREACH'))
 
     Check the connectivity from the nodes with the Cinder role to the Datera Management VIP and make sure connectivity can be established::
 
@@ -201,7 +206,8 @@ When the OSTF checks fail, or if deployment of volumes and/or instances with reg
 
   b) API Version error::
 
-        DateraAPIException: Request to Datera cluster returned bad status: 400 | Bad Request
+        DateraAPIException: Request to Datera cluster returned bad status: 400
+        | Bad Request
 
     This can only occur if someone altered the */etc/cinder/cinder.conf* on the Cinder nodes and manually added the *datera_api_version* and set it to *1*, only *2* is supported which is the default.
 
@@ -209,7 +215,8 @@ When the OSTF checks fail, or if deployment of volumes and/or instances with reg
 
   c) Username and Password Errors::
 
-         Logging into the Datera cluster failed. Please check your username and password set in the cinder.conf and start the cinder-volumeservice again.
+         Logging into the Datera cluster failed. Please check your username and
+         password set in the cinder.conf and start the cinder-volumeservice again.
 
     Make sure the Username and Password are correct and were correctly entered in configure_.
 
@@ -217,17 +224,25 @@ When the OSTF checks fail, or if deployment of volumes and/or instances with reg
 
   d) iSCSI is unreachable for the Compute nodes::
 
-         ImageCopyFailure: Failed to copy image to volume: iscsiadm: No session found.
+         ImageCopyFailure: Failed to copy image to volume: iscsiadm:
+         No session found.
 
     or::
 
-         Exception during message handling: Failed to copy image to volume: iscsiadm: No session found.
+         Exception during message handling: Failed to copy image to volume:
+         iscsiadm: No session found.
 
     or in general::
 
          iscsiadm: No session found.
 
-    Validate connectivity from the Compute nodes to an Application Instance IP. Log in to the Datera web UI and use the *Provision Storage button*. Fill in the required fields, marked with a `*` and click the *Provision button*. If the application instance is not created and/or does not come on line please contact your Datera Systems or Support Engineer, as your problem is not related to Fuel or OpenStack. If successful the *Application Instance* will get an *Access IP* and a *Target IQN*::
+    Validate connectivity from the Compute nodes to an *Application Instance*.
+    Log in to the Datera web UI and use the *Provision Storage button*. Fill in
+    the required fields, marked with a `*` and click the *Provision button*.
+    If the *Application Instance* is not created and/or does not come on line please
+    contact your Datera Systems or Support Engineer, as your problem is not related
+    to Fuel or OpenStack. If successful the *Application Instance* will get an
+    *Access IP* and a *Target IQN* which would allow connectivity::
 
          root@node-5:~# nc -z -v 192.168.123.119 3260
          Connection to 192.168.123.119 3260 port [tcp/iscsi-target] succeeded!
@@ -237,35 +252,41 @@ When the OSTF checks fail, or if deployment of volumes and/or instances with reg
          root@node-4:~#  iscsiadm -m discovery -t sendtargets -p 192.168.123.119
          192.168.123.119:3260,1 iqn.2013-05.com.daterainc:tc:01:sn:b3ef26a6b011aaab
 
-  e) Use the Datera UI or CLI *event* and *audit* logs as mentioned in the verify_ to verify that the system is actually receiving requests from Openstack.
+    If this is possible validation of the Datera EDF connectivity is successful.
+
+  e) Use the Datera UI or CLI *event* and *audit* logs to verify_ that the system is actually receiving requests from Openstack.
 
   f) For other errors related please contact the `maintainers <https://launchpad.net/fuel-plugin-datera-cinder>`_ of the Datera Cinder Fuel Plugin or create a bug in `launchpad <https://bugs.launchpad.net/fuel-plugin-datera-cinder>`_.
 
-3. When OSTF fails and the Datera Cinder plugin is configured incorrectly or the VIP is not reachable OSTF will have 2 errors that are the same::
+3. When OSTF fails and the Datera Cinder plugin is configured incorrectly or the VIP is not reachable OSTF will have 2 errors that are the same:
 
-    1) Create volume and boot instance from it::
+  1) Create volume and boot instance from it::
 
-      Failed to get to expected status. In error state. Please refer to OpenStack logs for more details.
+      Failed to get to expected status. In error state. Please refer to OpenStack
+       logs for more details.
       ...
       2. Wait for volume status to become "available".
 
-    2) Create volume and attach it to instance::
+  2) Create volume and attach it to instance::
 
-      Failed to get to expected status. In error state. Please refer to OpenStack logs for more details.
+      Failed to get to expected status. In error state. Please refer to OpenStack
+       logs for more details.
       ...
       2. Wait for volume status to become "available".
 
-4. When the iSCSI port of the Application Instances is not available for the Compute nodes OSTF will show 2 different errors::
+4. When the iSCSI port of the Application Instances is not available for the Compute nodes OSTF will show 2 different errors:
 
-    1) Create volume and boot instance from it::
+  1) Create volume and boot instance from it::
 
-      Failed to get to expected status. In error state. Please refer to OpenStack logs for more details.
+      Failed to get to expected status. In error state. Please refer to OpenStack
+       logs for more details.
       ...
       2. Wait for volume status to become "available".
 
-    2) Create volume and attach it to instance::
+  2) Create volume and attach it to instance::
 
-      Time limit exceeded while waiting for volume becoming 'in-use' to finish. Please refer to OpenStack logs for more details.
+      Time limit exceeded while waiting for volume becoming 'in-use' to finish.
+       Please refer to OpenStack logs for more details.
       ...
       7. Check volume status is "in use".
 
