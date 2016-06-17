@@ -126,16 +126,16 @@ The configuration for both Fuel 7.0 and 8.0, differences will be marked.
     By default the Datera plugin will not use Multibackend as a configuration option. This means that the configuration options will be set in the 'default' context of the cinder.conf file. In Fuel 8.0 the 'Multibackend enabled' checkbox can be set to support  multiple backends in cinder, which will put the configuration options in it's own Datera context.
 
 #. 'Cluster Management VIP (san_ip)':
-    The IP or DNS name of the management VIP for the Datera EDF.
+    The IP or DNS name of the management VIP for the Datera EDF (e.g 192.168.123.20).
 
 #. 'Login for Admin account (san_login)':
-    The username of the account that has the correct rights to provision storage, this can be the Openstack user, the admin user or a specific tenant user.
+    The username of the account that has the correct rights to provision storage, this can be the Openstack user, the admin user or a specific tenant user (e.g. admin or openstack).
 
 #. 'Password for Admin account (san_password)':
-    The password for the previously mentioned account.
+    The password for the previously mentioned account (e.g. password).
 
 #. 'Data replication factor (datera_num_replicas)':
-    This setting dictates how many copies of an app-instance will be distributed over the Datera EDF using its smart placement policies.
+    This setting dictates how many copies of an app-instance will be distributed over the Datera EDF using its smart placement policies. (e.g. 2 or 3)
 
 #. When configuration is complete the network check can be run and the environment can be deployed.
 

@@ -275,9 +275,17 @@ System testing
 |                   |                                                                      |
 |                   | 3. Ensure that the plugin is installed successfully using the CLI.   |
 |                   |                                                                      |
-|                   | 4. Remove the plugin                                                 |
+|                   | 4. Create new environment.                                           |
 |                   |                                                                      |
-|                   | 5. Check that it was successfully removed                            |
+|                   | 5. Enable and configure plugin.                                      |
+|                   |                                                                      |
+|                   | 6. Run network verification check.                                   |
+|                   |                                                                      |
+|                   | 7. Delete listed environment.                                        |
+|                   |                                                                      |
+|                   | 8. Remove the plugin                                                 |
+|                   |                                                                      |
+|                   | 9. Check that it was successfully removed                            |
 +-------------------+----------------------------------------------------------------------+
 | Expected Result   | *Plugin was installed and then removed successfully.*                |
 +-------------------+----------------------------------------------------------------------+
